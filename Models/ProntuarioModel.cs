@@ -6,9 +6,6 @@ namespace Sistema_Prontuario.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "A identificação do usuário é obrigatória.")]
-        public string UserId { get; set; }
-
         [Required(ErrorMessage = "O campo CPF é obrigatório.")]
         public string CPF { get; set; }
 
