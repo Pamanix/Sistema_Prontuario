@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/Images/background.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .text-center {
+            /* Estilos para centralizar conteúdo, se necessário */
+        }
+
+        #fundo {
+            /* Estilos para seu conteúdo */
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4" style="color:white; padding:30px;">Bem Vindo</h1>
+        <br />
+        <div id="fundo" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="background-color:white; border-radius: 5px; padding:8px; border: 5px;" asp-area="" asp-controller="Home" asp-action="AcessoPaciente">Acesso Paciente</a>
+                </li>
+                <br />
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="background-color:white; border-radius: 5px; padding:8px; border: 5px;" asp-area="" asp-controller="Home" asp-action="AcessoRestrito">Acesso Restrito</a>
+                </li>
+                <br />
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="background-color:white; border-radius: 5px; padding:8px; border: 5px;" asp-area="" asp-controller="Cadastro" asp-action="Cadastro">Cadastro</a>
+                </li>
+                <br />
+                <li class="nav-item">
+                    <a class="nav-link text-dark" style="background-color:white; border-radius: 5px; padding:8px; border: 5px;" asp-area="" asp-controller="Cadastro" asp-action="CadastroMedico">Cadastro Medico</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
