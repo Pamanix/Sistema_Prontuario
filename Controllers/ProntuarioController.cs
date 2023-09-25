@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,12 @@ namespace Sistema_Prontuario.Controllers
         // GET: Prontuario
         public async Task<IActionResult> Index()
         {
-              return _context.Prontuarios != null ? 
-                          View(await _context.Prontuarios.ToListAsync()) :
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            return _context.Prontuarios != null ? 
+                          View(await _context.Prontuarios
+                           //.Where(prontuario => prontuario.UserId == userId)
+                          .ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Prontuarios'  is null.");
         }
 
@@ -62,6 +67,8 @@ namespace Sistema_Prontuario.Controllers
         {
             if (ModelState.IsValid)
             {
+                prontuario.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Atribui a identificação do usuário autenticado
+
                 _context.Add(prontuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,6 +89,13 @@ namespace Sistema_Prontuario.Controllers
             {
                 return NotFound();
             }
+            // Verifique se o usuário autenticado é o criador do prontuário
+            if (prontuario.UserId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+            {
+                return Forbid(); // Retorne uma resposta de proibido se o usuário não for o criador
+            }
+
+
             return View(prontuario);
         }
 
